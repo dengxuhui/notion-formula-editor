@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using NotionFormulaEditor;
 using UnityEngine;
 using UnityEngine.UI.Extensions;
 
@@ -6,32 +7,34 @@ namespace RuntimeNodeEditor
 {
     public class BezierCurveDrawer : MonoBehaviour
     {
-        public UILineRenderer RequestLine { get { return _lineRenderer; } }
+        public UILineRenderer RequestLine
+        {
+            get { return _lineRenderer; }
+        }
 
         public RectTransform pointerLocator;
         public RectTransform lineContainer;
-        [Header("Bezier settings")]
-        public float vertexCount = 60f;
-        public float lineThickness = 4f;  
+        [Header("Bezier settings")] public float vertexCount = 60f;
+        public float lineThickness = 4f;
         public Color connectionColor = Color.yellow;
 
-        private RectTransform                _lineContainer;
-        private RectTransform                _pointerLocator;
-        private UILineRenderer               _lineRenderer;
-        private bool                         _hasRequest;
-        private Socket                       _draggingSocket;
-        private IConnectionEvents            _events;
+        private RectTransform _lineContainer;
+        private RectTransform _pointerLocator;
+        private UILineRenderer _lineRenderer;
+        private bool _hasRequest;
+        private Socket _draggingSocket;
+        private IConnectionEvents _events;
         private Dictionary<string, ConnectionDrawData> _connections;
 
 
         public void Init(IConnectionEvents events)
         {
-            _connections    = new Dictionary<string, ConnectionDrawData>();
-            _lineContainer  = lineContainer;
+            _connections = new Dictionary<string, ConnectionDrawData>();
+            _lineContainer = lineContainer;
             _pointerLocator = pointerLocator;
-            _lineRenderer   = CreateLine();
-            _hasRequest     = false;
-            _events         = events;
+            _lineRenderer = CreateLine();
+            _hasRequest = false;
+            _events = events;
 
             CancelDrag();
         }
@@ -83,6 +86,7 @@ namespace RuntimeNodeEditor
         {
             _connections[connId].lineRenderer.color = color;
         }
+
         //  drawing
         private void DrawConnection(SocketHandle port1, SocketHandle port2, UILineRenderer lineRenderer)
         {
@@ -92,10 +96,10 @@ namespace RuntimeNodeEditor
             {
                 var t = i / vertexCount;
                 pointList.Add(Utility.CubicCurve(GetLocalPoint(port1.handle1.position),
-                                                 GetLocalPoint(port1.handle2.position),
-                                                 GetLocalPoint(port2.handle1.position),
-                                                 GetLocalPoint(port2.handle2.position),
-                                                 t));
+                    GetLocalPoint(port1.handle2.position),
+                    GetLocalPoint(port2.handle1.position),
+                    GetLocalPoint(port2.handle2.position),
+                    t));
             }
 
             lineRenderer.m_points = pointList.ToArray();
@@ -104,9 +108,10 @@ namespace RuntimeNodeEditor
 
         private void DrawDragging(SocketHandle port)
         {
-	        Vector2 localPointerPos;
-	        var mousePosition = Utility.GetMousePosition();
-	        RectTransformUtility.ScreenPointToLocalPointInRectangle(_lineContainer, mousePosition, null, out localPointerPos);
+            Vector2 localPointerPos;
+            var mousePosition = Utility.GetMousePosition();
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(_lineContainer, mousePosition,
+                CameraManager.Instance.current, out localPointerPos);
 
             _pointerLocator.localPosition = localPointerPos;
 
@@ -116,9 +121,9 @@ namespace RuntimeNodeEditor
             {
                 var t = i / vertexCount;
                 pointList.Add(Utility.QuadraticCurve(GetLocalPoint(port.handle1.position),
-                                                     GetLocalPoint(port.handle2.position),
-                                                     GetLocalPoint(_pointerLocator.position),
-                                                     t));
+                    GetLocalPoint(port.handle2.position),
+                    GetLocalPoint(_pointerLocator.position),
+                    t));
             }
 
             _lineRenderer.m_points = pointList.ToArray();
@@ -132,9 +137,9 @@ namespace RuntimeNodeEditor
 
         private UILineRenderer CreateLine(Color color)
         {
-            var lineGO          = new GameObject("BezierLine");
-            var linerenderer    = lineGO.AddComponent<UILineRenderer>();
-            var lineRect        = lineGO.GetComponent<RectTransform>();
+            var lineGO = new GameObject("BezierLine");
+            var linerenderer = lineGO.AddComponent<UILineRenderer>();
+            var lineRect = lineGO.GetComponent<RectTransform>();
 
             lineGO.transform.SetParent(_lineContainer);
 
@@ -142,16 +147,22 @@ namespace RuntimeNodeEditor
             lineRect.localScale = Vector3.one;
             lineRect.Stretch();
 
-            linerenderer.lineThickness  = lineThickness;
-            linerenderer.color          = color;
-            linerenderer.raycastTarget  = false;
+            linerenderer.lineThickness = lineThickness;
+            linerenderer.color = color;
+            linerenderer.raycastTarget = false;
 
             return linerenderer;
         }
 
-        private Vector2 GetLocalPoint(Vector3 pos)
+        /// <summary>
+        /// 获取在lineContainer下的局部坐标
+        /// </summary>
+        /// <param name="worldPos"></param>
+        /// <returns></returns>
+        private Vector2 GetLocalPoint(Vector3 worldPos)
         {
-            return Utility.GetLocalPointIn(_lineContainer, pos);
+            var screenPoint = RectTransformUtility.WorldToScreenPoint(CameraManager.Instance.current, worldPos);
+            return Utility.TransScreenPos2LocalPoint(_lineContainer, screenPoint);
         }
 
         private class ConnectionDrawData
@@ -169,7 +180,5 @@ namespace RuntimeNodeEditor
                 this.lineRenderer = lineRenderer;
             }
         }
-
     }
-
 }

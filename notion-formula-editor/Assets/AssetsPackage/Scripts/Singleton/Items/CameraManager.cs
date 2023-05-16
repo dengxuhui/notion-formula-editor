@@ -9,10 +9,10 @@ namespace NotionFormulaEditor
     public class CameraManager : MonoSingleton<CameraManager>
     {
         //当前相机
-        private Camera _camera;
+        private Camera _current;
         
         //获取当前相机
-        public Camera camera => _camera;
+        public Camera current => _current;
         
         protected override void Init()
         {
@@ -34,7 +34,7 @@ namespace NotionFormulaEditor
 
         private void RefreshCamera()
         {
-            _camera = Camera.main;
+            _current = Camera.main;
         }
     }
 }

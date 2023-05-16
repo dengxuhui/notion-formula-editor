@@ -17,7 +17,7 @@ namespace NotionFormulaEditor
             Events.OnNodePointerClickEvent += OnNodePointerClick;
             Events.OnConnectionPointerClickEvent += OnNodeConnectionPointerClick;
             Events.OnSocketConnect += OnConnect;
-            
+
             // Graph.
         }
 
@@ -33,7 +33,17 @@ namespace NotionFormulaEditor
                 case PointerEventData.InputButton.Right:
                 {
                     var ctx = new ContextMenuBuilder();
-                    var ctxData = ctx.Add("test", () => { Debug.Log("TestGraphClick"); }).Build();
+                    ctx.Add("nodes/constant", () =>
+                    {
+                        Graph.Create("Prefabs/Nodes/ConstantNode");
+                        CloseContextMenu();
+                    });
+                    ctx.Add("nodes/operators/if", () =>
+                    {
+                        Graph.Create("Prefabs/Nodes/BranchNode");
+                        CloseContextMenu();
+                    });
+                    var ctxData = ctx.Build();
 
                     SetContextMenu(ctxData);
                     DisplayContextMenu();

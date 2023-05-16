@@ -17,10 +17,18 @@ namespace RuntimeNodeEditor
             return mousePosition;
         }
 
-        public static Vector2 GetLocalPointIn(RectTransform container, Vector3 pos, Camera eventCamera = null)
+        /// <summary>
+        /// 将屏幕坐标转换为container下的局部坐标
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="screenPos"></param>
+        /// <param name="eventCamera"></param>
+        /// <returns></returns>
+        public static Vector2 TransScreenPos2LocalPoint(RectTransform container, Vector3 screenPos, Camera eventCamera = null)
         {
+            eventCamera = eventCamera ? eventCamera : CameraManager.Instance.current;
             var point = Vector2.zero;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(container, pos, eventCamera, out point);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(container, screenPos, eventCamera, out point);
             return point;
         }
 
@@ -31,13 +39,13 @@ namespace RuntimeNodeEditor
 #if ENABLE_LEGACY_INPUT_MANAGER
             success = RectTransformUtility.ScreenPointToLocalPointInRectangle(rect,
                                                                                   Input.mousePosition,
-                                                                                  CameraManager.Instance.camera,
+                                                                                  CameraManager.Instance.current,
                                                                                   out localPointerPos);
 #endif
 #if ENABLE_INPUT_SYSTEM
 	        success = RectTransformUtility.ScreenPointToLocalPointInRectangle(rect,
 		        						UnityEngine.InputSystem.Mouse.current.position.ReadValue(),
-		        						CameraManager.Instance.camera,
+		        						CameraManager.Instance.current,
 		        						out localPointerPos);
 #endif
             return localPointerPos;

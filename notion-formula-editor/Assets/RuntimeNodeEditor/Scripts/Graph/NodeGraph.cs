@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NotionFormulaEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,52 +9,52 @@ namespace RuntimeNodeEditor
 {
     public class NodeGraph : MonoBehaviour
     {
-        public RectTransform        GraphContainer  => _graphContainer;
+        public RectTransform GraphContainer => _graphContainer;
 
         //  scene references
-        public RectTransform        contextMenuContainer;
-        public RectTransform        nodeContainer;
-        public RectTransform        background;
+        public RectTransform contextMenuContainer;
+        public RectTransform nodeContainer;
+        public RectTransform background;
         public GraphPointerListener pointerListener;
-        public BezierCurveDrawer    drawer;
+        public BezierCurveDrawer drawer;
 
-        public List<Node>           nodes;
-        public List<Connection>     connections;
+        public List<Node> nodes;
+        public List<Connection> connections;
 
         //  cache
-        private SocketOutput        _currentDraggingSocket;
-        private Vector2             _pointerOffset;
-	    private Vector2             _localPointerPos;
-	    private Vector2             _duplicateOffset;
-        private Vector2             _zoomCenterPos;
-        private float               _currentZoom;
-        private float               _minZoom;
-        private float               _maxZoom;
-        private RectTransform       _nodeContainer;
-	    private RectTransform       _graphContainer;
+        private SocketOutput _currentDraggingSocket;
+        private Vector2 _pointerOffset;
+        private Vector2 _localPointerPos;
+        private Vector2 _duplicateOffset;
+        private Vector2 _zoomCenterPos;
+        private float _currentZoom;
+        private float _minZoom;
+        private float _maxZoom;
+        private RectTransform _nodeContainer;
+        private RectTransform _graphContainer;
 
-        private SignalSystem        _signalSystem;
+        private SignalSystem _signalSystem;
 
         public void Init(SignalSystem signalSystem, float minZoom, float maxZoom)
         {
-            _nodeContainer                              = nodeContainer;
-            _graphContainer                             = this.GetComponent<RectTransform>();
-	        _duplicateOffset                            = (Vector2.one * 10f);
-            nodes                                       = new List<Node>();
-	        connections                                 = new List<Connection>();
-            _signalSystem                               = signalSystem;
-            _currentZoom                                = 1f;
-            _minZoom                                    = minZoom;
-            _maxZoom                                    = maxZoom;
+            _nodeContainer = nodeContainer;
+            _graphContainer = this.GetComponent<RectTransform>();
+            _duplicateOffset = (Vector2.one * 10f);
+            nodes = new List<Node>();
+            connections = new List<Connection>();
+            _signalSystem = signalSystem;
+            _currentZoom = 1f;
+            _minZoom = minZoom;
+            _maxZoom = maxZoom;
 
-            _signalSystem.OnOutputSocketDragStartEvent    += OnOutputDragStarted;
-            _signalSystem.OnOutputSocketDragDropEvent     += OnOutputDragDroppedTo;
-            _signalSystem.OnInputSocketClickEvent         += OnInputSocketClicked;
-            _signalSystem.OnOutputSocketClickEvent        += OnOutputSocketClicked;
-            _signalSystem.OnNodePointerDownEvent          += OnNodePointerDown;
-            _signalSystem.OnNodePointerDragEvent          += OnNodePointerDrag;
-            _signalSystem.OnGraphPointerDragEvent         += OnGraphPointerDragged;
-            _signalSystem.OnGraphPointerScrollEvent       += OnGraphPointerScrolled;
+            _signalSystem.OnOutputSocketDragStartEvent += OnOutputDragStarted;
+            _signalSystem.OnOutputSocketDragDropEvent += OnOutputDragDroppedTo;
+            _signalSystem.OnInputSocketClickEvent += OnInputSocketClicked;
+            _signalSystem.OnOutputSocketClickEvent += OnOutputSocketClicked;
+            _signalSystem.OnNodePointerDownEvent += OnNodePointerDown;
+            _signalSystem.OnNodePointerDragEvent += OnNodePointerDrag;
+            _signalSystem.OnGraphPointerDragEvent += OnGraphPointerDragged;
+            _signalSystem.OnGraphPointerScrollEvent += OnGraphPointerScrolled;
 
             pointerListener.Init(_signalSystem);
             drawer.Init(_signalSystem);
@@ -66,15 +67,15 @@ namespace RuntimeNodeEditor
 
         public void Create(string prefabPath)
         {
-	        var mousePosition   = Utility.GetMousePosition();
-	        var pos             = Utility.GetLocalPointIn(nodeContainer, mousePosition);
-            
+            var mousePosition = Utility.GetMousePosition();
+            var pos = Utility.TransScreenPos2LocalPoint(nodeContainer, mousePosition);
+
             Create(prefabPath, pos);
         }
 
         public void Create(string prefabPath, Vector2 pos)
         {
-            var node            = Utility.CreateNodePrefab<Node>(prefabPath, nodeContainer);
+            var node = Utility.CreateNodePrefab<Node>(prefabPath, nodeContainer);
             node.Init(_signalSystem, _signalSystem, pos, NewId(), prefabPath);
             node.Setup();
             nodes.Add(node);
@@ -87,15 +88,15 @@ namespace RuntimeNodeEditor
             Destroy(node.gameObject);
             nodes.Remove(node);
         }
-        
-	    public void Duplicate(Node node)
-	    {
-		    Serializer info = new Serializer();
-		    node.OnSerialize(info);
-		    Create(node.LoadPath, node.Position + _duplicateOffset);
-		    var newNode = nodes.Last();
-		    newNode.OnDeserialize(info);
-	    }
+
+        public void Duplicate(Node node)
+        {
+            Serializer info = new Serializer();
+            node.OnSerialize(info);
+            Create(node.LoadPath, node.Position + _duplicateOffset);
+            var newNode = nodes.Last();
+            newNode.OnDeserialize(info);
+        }
 
         public void Connect(SocketInput input, SocketOutput output)
         {
@@ -113,8 +114,8 @@ namespace RuntimeNodeEditor
 
         public void Disconnect(Connection conn)
         {
-            var input   = conn.input;
-            var output  = conn.output;
+            var input = conn.input;
+            var output = conn.output;
 
             drawer.Remove(conn.connId);
             input.OwnerNode.Disconnect(input, output);
@@ -131,7 +132,7 @@ namespace RuntimeNodeEditor
             var dcList = new List<Connection>(input.Connections);
             foreach (var conn in dcList)
             {
-                Disconnect(conn);   
+                Disconnect(conn);
             }
         }
 
@@ -200,9 +201,9 @@ namespace RuntimeNodeEditor
 
         public GraphData Export()
         {
-            var graph       = new GraphData();
-            var nodeDatas   = new List<NodeData>();
-            var connDatas   = new List<ConnectionData>();
+            var graph = new GraphData();
+            var nodeDatas = new List<NodeData>();
+            var connDatas = new List<ConnectionData>();
 
             foreach (var node in nodes)
             {
@@ -264,8 +265,8 @@ namespace RuntimeNodeEditor
             if (eventData.button == PointerEventData.InputButton.Right)
             {
                 connections.Where(conn => conn.input == input)
-                            .ToList()
-                            .ForEach(conn => Disconnect(conn));
+                    .ToList()
+                    .ForEach(conn => Disconnect(conn));
             }
         }
 
@@ -274,8 +275,8 @@ namespace RuntimeNodeEditor
             if (eventData.button == PointerEventData.InputButton.Right)
             {
                 connections.Where(conn => conn.output == output)
-                            .ToList()
-                            .ForEach(conn => Disconnect(conn));
+                    .ToList()
+                    .ForEach(conn => Disconnect(conn));
             }
         }
 
@@ -292,7 +293,7 @@ namespace RuntimeNodeEditor
             // check if output connected to this target input already 
             if (_currentDraggingSocket.HasConnection() && target.HasConnection())
             {
-                if (target.Connections.Contains(_currentDraggingSocket.connection) )
+                if (target.Connections.Contains(_currentDraggingSocket.connection))
                 {
                     //  then do nothing
                     _currentDraggingSocket = null;
@@ -343,7 +344,7 @@ namespace RuntimeNodeEditor
         {
             node.SetAsLastSibling();
             RectTransformUtility.ScreenPointToLocalPointInRectangle(node.PanelRect, eventData.position,
-                                                                    eventData.pressEventCamera, out _pointerOffset);
+                eventData.pressEventCamera, out _pointerOffset);
             DragNode(node, eventData);
         }
 
@@ -356,16 +357,20 @@ namespace RuntimeNodeEditor
         {
             if (Mathf.Abs(eventData.scrollDelta.y) > float.Epsilon)
             {
-                _currentZoom    *= 1f + eventData.scrollDelta.y;
-	            _currentZoom    = Mathf.Clamp(_currentZoom, _minZoom, _maxZoom);
-	            _zoomCenterPos  = Utility.GetMousePosition();
+                _currentZoom *= 1f + eventData.scrollDelta.y;
+                _currentZoom = Mathf.Clamp(_currentZoom, _minZoom, _maxZoom);
+                _zoomCenterPos = Utility.GetMousePosition();
 
                 Vector2 beforePointInContent;
-                RectTransformUtility.ScreenPointToLocalPointInRectangle(_graphContainer, _zoomCenterPos, null, out beforePointInContent);
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(_graphContainer, _zoomCenterPos,
+                    CameraManager.Instance.current, out beforePointInContent);
 
-                Vector2 pivotPosition = new Vector3(_graphContainer.pivot.x * _graphContainer.rect.size.x, _graphContainer.pivot.y * _graphContainer.rect.size.y);
+                Vector2 pivotPosition = new Vector3(_graphContainer.pivot.x * _graphContainer.rect.size.x,
+                    _graphContainer.pivot.y * _graphContainer.rect.size.y);
                 Vector2 posFromBottomLeft = pivotPosition + beforePointInContent;
-                SetPivot(_graphContainer, new Vector2(posFromBottomLeft.x / _graphContainer.rect.width, posFromBottomLeft.y / _graphContainer.rect.height));
+                SetPivot(_graphContainer,
+                    new Vector2(posFromBottomLeft.x / _graphContainer.rect.width,
+                        posFromBottomLeft.y / _graphContainer.rect.height));
 
                 if (Mathf.Abs(_graphContainer.localScale.x - _currentZoom) > 0.001f)
                 {
@@ -395,7 +400,7 @@ namespace RuntimeNodeEditor
             {
                 Vector2 pointerPos = ClampToNodeContainer(eventData);
                 var success = RectTransformUtility.ScreenPointToLocalPointInRectangle(_nodeContainer, pointerPos,
-                                                                                eventData.pressEventCamera, out _localPointerPos);
+                    eventData.pressEventCamera, out _localPointerPos);
                 if (success)
                 {
                     node.SetPosition(_localPointerPos - _pointerOffset);
@@ -409,6 +414,12 @@ namespace RuntimeNodeEditor
             var rawPointerPos = eventData.position;
             var canvasCorners = new Vector3[4];
             _nodeContainer.GetWorldCorners(canvasCorners);
+            for (var i = 0; i < canvasCorners.Length; i++)
+            {
+                var worldPos = canvasCorners[i];
+                var screenPos = RectTransformUtility.WorldToScreenPoint(CameraManager.Instance.current, worldPos);
+                canvasCorners[i] = screenPos;
+            }
 
             var clampedX = Mathf.Clamp(rawPointerPos.x, canvasCorners[0].x, canvasCorners[2].x);
             var clampedY = Mathf.Clamp(rawPointerPos.y, canvasCorners[0].y, canvasCorners[2].y);
@@ -433,7 +444,7 @@ namespace RuntimeNodeEditor
         private void LoadNode(NodeData data)
         {
             var node = Utility.CreateNodePrefab<Node>(data.path, nodeContainer);
-            var pos  = new Vector2(data.posX, data.posY);
+            var pos = new Vector2(data.posX, data.posY);
             node.Init(_signalSystem, _signalSystem, pos, data.id, data.path);
             node.Setup();
             nodes.Add(node);
@@ -466,10 +477,15 @@ namespace RuntimeNodeEditor
         {
             Vector2 size = rectTransform.rect.size;
             Vector2 deltaPivot = rectTransform.pivot - pivot;
-            Vector3 deltaPosition = new Vector3(deltaPivot.x * size.x, deltaPivot.y * size.y) * rectTransform.localScale.x;
+            Vector3 deltaPosition =
+                new Vector3(deltaPivot.x * size.x, deltaPivot.y * size.y) * rectTransform.localScale.x;
             rectTransform.pivot = pivot;
             rectTransform.localPosition -= deltaPosition;
         }
-        private static string NewId() { return System.Guid.NewGuid().ToString(); }
+
+        private static string NewId()
+        {
+            return System.Guid.NewGuid().ToString();
+        }
     }
 }
