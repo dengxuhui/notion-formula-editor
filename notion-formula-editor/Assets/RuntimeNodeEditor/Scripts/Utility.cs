@@ -26,7 +26,7 @@ namespace RuntimeNodeEditor
         /// <returns></returns>
         public static Vector2 TransScreenPos2LocalPoint(RectTransform container, Vector3 screenPos, Camera eventCamera = null)
         {
-            eventCamera = eventCamera ? eventCamera : CameraManager.Instance.current;
+            eventCamera = eventCamera ? eventCamera : CameraManager.I.current;
             var point = Vector2.zero;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(container, screenPos, eventCamera, out point);
             return point;
@@ -39,7 +39,7 @@ namespace RuntimeNodeEditor
 #if ENABLE_LEGACY_INPUT_MANAGER
             success = RectTransformUtility.ScreenPointToLocalPointInRectangle(rect,
                                                                                   Input.mousePosition,
-                                                                                  CameraManager.Instance.current,
+                                                                                  CameraManager.I.current,
                                                                                   out localPointerPos);
 #endif
 #if ENABLE_INPUT_SYSTEM

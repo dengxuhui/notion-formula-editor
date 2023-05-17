@@ -1,4 +1,5 @@
 using System;
+using NotionFormulaEditor.Config;
 using RuntimeNodeEditor;
 using UnityEngine;
 
@@ -15,7 +16,8 @@ namespace NotionFormulaEditor
         private void Start()
         {
             Application.targetFrameRate = 60;
-            CameraManager.Instance.Startup();
+            CameraManager.I.Startup();
+            ConfigManager.I.Startup();
             //创建节点图
             var graph = editor.CreateGraph<NodeGraph>(editorHolder);
             editor.StartEditor(graph);

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NotionFormulaEditor.Types;
 using RuntimeNodeEditor;
 using TMPro;
 
@@ -23,16 +24,13 @@ namespace NotionFormulaEditor.Nodes
                 new(ConstantNodeType.boolean_true.ToString()),
                 new(ConstantNodeType.boolean_false.ToString()),
             });
-            
-            dropdown.onValueChanged.AddListener(selected =>
-            {
-                OnDropdownValueChanged(selected);
-            });
+
+            dropdown.onValueChanged.AddListener(selected => { OnDropdownValueChanged(selected); });
 
             OnConnectionEvent += OnConnection;
             OnDisconnectEvent += OnDisconnect;
         }
-        
+
         public void OnConnection(SocketInput input, IOutput output)
         {
         }
@@ -43,7 +41,6 @@ namespace NotionFormulaEditor.Nodes
 
         private void OnDropdownValueChanged(int selected)
         {
-            
         }
     }
 }

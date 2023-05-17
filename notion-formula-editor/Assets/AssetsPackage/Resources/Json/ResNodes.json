@@ -1,0 +1,16 @@
+[
+  {
+    "Name": "Constant",
+    "ID": 1,
+    "Menu": "Constant",
+    "Prefab": "Prefabs/Nodes/ConstantNode",
+    "NodeType": 1
+  },
+  {
+    "Name": "Branch",
+    "ID": 2,
+    "Menu": "Operators/if",
+    "Prefab": "Prefabs/Nodes/BranchNode",
+    "NodeType": 2
+  }
+]

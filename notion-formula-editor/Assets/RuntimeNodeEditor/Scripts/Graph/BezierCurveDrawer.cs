@@ -111,7 +111,7 @@ namespace RuntimeNodeEditor
             Vector2 localPointerPos;
             var mousePosition = Utility.GetMousePosition();
             RectTransformUtility.ScreenPointToLocalPointInRectangle(_lineContainer, mousePosition,
-                CameraManager.Instance.current, out localPointerPos);
+                CameraManager.I.current, out localPointerPos);
 
             _pointerLocator.localPosition = localPointerPos;
 
@@ -161,7 +161,7 @@ namespace RuntimeNodeEditor
         /// <returns></returns>
         private Vector2 GetLocalPoint(Vector3 worldPos)
         {
-            var screenPoint = RectTransformUtility.WorldToScreenPoint(CameraManager.Instance.current, worldPos);
+            var screenPoint = RectTransformUtility.WorldToScreenPoint(CameraManager.I.current, worldPos);
             return Utility.TransScreenPos2LocalPoint(_lineContainer, screenPoint);
         }
 

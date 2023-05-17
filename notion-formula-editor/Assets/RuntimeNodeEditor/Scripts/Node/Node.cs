@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using NotionFormulaEditor.Config;
 using TMPro;
 using UnityEngine;
 
@@ -7,46 +8,60 @@ namespace RuntimeNodeEditor
 {
     public abstract class Node : MonoBehaviour
     {
-        public string               ID          { get; private set; }
-        public Vector2              Position    { get => _panelRectTransform.anchoredPosition; }
-        public RectTransform        PanelRect   { get => _panelRectTransform; }
-        public string               LoadPath    { get; private set; }
-        public List<SocketOutput>   Outputs     { get; private set; }
-        public List<SocketInput>    Inputs      { get; private set; }
+        public string ID { get; private set; }
+
+        public Vector2 Position
+        {
+            get => _panelRectTransform.anchoredPosition;
+        }
+
+        public RectTransform PanelRect
+        {
+            get => _panelRectTransform;
+        }
+
+        public string LoadPath { get; private set; }
+        public List<SocketOutput> Outputs { get; private set; }
+        public List<SocketInput> Inputs { get; private set; }
 
         public event Action<SocketInput, IOutput> OnConnectionEvent;
         public event Action<SocketInput, IOutput> OnDisconnectEvent;
 
-        public TMP_Text                     headerText;
-        public GameObject                   draggableBody;
+        public TMP_Text headerText;
+        public GameObject draggableBody;
 
-        private NodeDraggablePanel          _dragPanel;
-        private RectTransform               _panelRectTransform;
-        private INodeEvents                 _nodeEvents;
-        private ISocketEvents               _socketEvents;
+        private NodeDraggablePanel _dragPanel;
+        private RectTransform _panelRectTransform;
+        private INodeEvents _nodeEvents;
+        private ISocketEvents _socketEvents;
+        private ResNodes _nodeConfig;
+        public ResNodes nodeConfig => _nodeConfig;
 
-        public void Init(INodeEvents nodeEvents, ISocketEvents socketEvents, Vector2 pos, string id, string path)
+        public void Init(INodeEvents nodeEvents, ISocketEvents socketEvents, Vector2 pos, string id, ResNodes config)
         {
-            ID                  = id;
-            LoadPath            = path;
-            Outputs             = new List<SocketOutput>();
-            Inputs              = new List<SocketInput>();
+            ID = id;
+            Outputs = new List<SocketOutput>();
+            Inputs = new List<SocketInput>();
 
-            _nodeEvents         = nodeEvents;
-            _socketEvents       = socketEvents;
+            _nodeConfig = config;
+            _nodeEvents = nodeEvents;
+            _socketEvents = socketEvents;
             _panelRectTransform = gameObject.GetComponent<RectTransform>();
-            _dragPanel          = draggableBody.AddComponent<NodeDraggablePanel>();
+            _dragPanel = draggableBody.AddComponent<NodeDraggablePanel>();
             _dragPanel.Init(this, _nodeEvents);
             SetPosition(pos);
         }
 
-        public virtual void Setup() { }
+        public virtual void Setup()
+        {
+            SetHeader(nodeConfig.Name);
+        }
 
         public virtual bool CanMove()
         {
             return true;
         }
-        
+
         public void Register(SocketOutput output)
         {
             output.SetOwner(this, _socketEvents);
@@ -71,12 +86,10 @@ namespace RuntimeNodeEditor
 
         public virtual void OnSerialize(Serializer serializer)
         {
-
         }
 
         public virtual void OnDeserialize(Serializer serializer)
         {
-
         }
 
         public void SetHeader(string name)
@@ -93,7 +106,7 @@ namespace RuntimeNodeEditor
         {
             _panelRectTransform.SetAsLastSibling();
         }
-        
+
         public void SetAsFirstSibling()
         {
             _panelRectTransform.SetAsFirstSibling();

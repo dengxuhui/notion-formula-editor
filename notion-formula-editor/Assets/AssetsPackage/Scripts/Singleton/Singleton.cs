@@ -11,7 +11,7 @@ namespace NotionFormulaEditor
     {
         private static T m_instance;
 
-        public static T instance
+        public static T I
         {
             get
             {
@@ -37,6 +37,10 @@ namespace NotionFormulaEditor
         }
 
         public virtual void Init()
+        {
+        }
+        
+        public void Startup()
         {
         }
 

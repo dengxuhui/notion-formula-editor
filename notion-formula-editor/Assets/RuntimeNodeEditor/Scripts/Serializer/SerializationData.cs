@@ -6,11 +6,14 @@ namespace RuntimeNodeEditor
     [Serializable]
     public class NodeData
     {
+        /// <summary>
+        /// 配置id
+        /// </summary>
+        public int configId;
         public string id;
         public SerializedValue[] values;
         public float posX;
         public float posY;
-        public string path;
         public string[] inputSocketIds;
         public string[] outputSocketIds;
     }

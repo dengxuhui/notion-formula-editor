@@ -10,7 +10,7 @@ namespace NotionFormulaEditor
     {
         private static T mInstance = null;
 
-        public static T Instance
+        public static T I
         {
             get
             {

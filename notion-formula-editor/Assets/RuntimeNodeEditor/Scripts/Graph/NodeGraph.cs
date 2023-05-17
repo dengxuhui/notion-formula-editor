@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NotionFormulaEditor;
+using NotionFormulaEditor.Config;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -65,18 +66,18 @@ namespace RuntimeNodeEditor
             _graphContainer.sizeDelta = size;
         }
 
-        public void Create(string prefabPath)
+        public void Create(ResNodes nodeConfig)
         {
             var mousePosition = Utility.GetMousePosition();
             var pos = Utility.TransScreenPos2LocalPoint(nodeContainer, mousePosition);
 
-            Create(prefabPath, pos);
+            Create(nodeConfig, pos);
         }
 
-        public void Create(string prefabPath, Vector2 pos)
+        public void Create(ResNodes nodeConfig, Vector2 pos)
         {
-            var node = Utility.CreateNodePrefab<Node>(prefabPath, nodeContainer);
-            node.Init(_signalSystem, _signalSystem, pos, NewId(), prefabPath);
+            var node = Utility.CreateNodePrefab<Node>(nodeConfig.Prefab, nodeContainer);
+            node.Init(_signalSystem, _signalSystem, pos, NewId(), nodeConfig);
             node.Setup();
             nodes.Add(node);
             HandleSocketRegister(node);
@@ -93,7 +94,7 @@ namespace RuntimeNodeEditor
         {
             Serializer info = new Serializer();
             node.OnSerialize(info);
-            Create(node.LoadPath, node.Position + _duplicateOffset);
+            Create(node.nodeConfig, node.Position + _duplicateOffset);
             var newNode = nodes.Last();
             newNode.OnDeserialize(info);
         }
@@ -215,7 +216,7 @@ namespace RuntimeNodeEditor
                 data.values = ser.Serialize();
                 data.posX = node.Position.x;
                 data.posY = node.Position.y;
-                data.path = node.LoadPath;
+                data.configId = node.nodeConfig.ID;
 
                 var inputIds = new List<string>();
                 foreach (var input in node.Inputs)
@@ -363,7 +364,7 @@ namespace RuntimeNodeEditor
 
                 Vector2 beforePointInContent;
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(_graphContainer, _zoomCenterPos,
-                    CameraManager.Instance.current, out beforePointInContent);
+                    CameraManager.I.current, out beforePointInContent);
 
                 Vector2 pivotPosition = new Vector3(_graphContainer.pivot.x * _graphContainer.rect.size.x,
                     _graphContainer.pivot.y * _graphContainer.rect.size.y);
@@ -417,7 +418,7 @@ namespace RuntimeNodeEditor
             for (var i = 0; i < canvasCorners.Length; i++)
             {
                 var worldPos = canvasCorners[i];
-                var screenPos = RectTransformUtility.WorldToScreenPoint(CameraManager.Instance.current, worldPos);
+                var screenPos = RectTransformUtility.WorldToScreenPoint(CameraManager.I.current, worldPos);
                 canvasCorners[i] = screenPos;
             }
 
@@ -443,9 +444,10 @@ namespace RuntimeNodeEditor
 
         private void LoadNode(NodeData data)
         {
-            var node = Utility.CreateNodePrefab<Node>(data.path, nodeContainer);
+            var nodeConfig = ConfigManager.Get<ResNodes>(data.configId);
+            var node = Utility.CreateNodePrefab<Node>(nodeConfig.Prefab, nodeContainer);
             var pos = new Vector2(data.posX, data.posY);
-            node.Init(_signalSystem, _signalSystem, pos, data.id, data.path);
+            node.Init(_signalSystem, _signalSystem, pos, data.id, nodeConfig);
             node.Setup();
             nodes.Add(node);
 

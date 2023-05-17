@@ -1,3 +1,4 @@
+using NotionFormulaEditor.Config;
 using RuntimeNodeEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -33,16 +34,15 @@ namespace NotionFormulaEditor
                 case PointerEventData.InputButton.Right:
                 {
                     var ctx = new ContextMenuBuilder();
-                    ctx.Add("nodes/constant", () =>
+                    var nodeConfigList = ConfigManager.GetGroup<ResNodes>().Configs;
+                    for (var i = 0; i < nodeConfigList.Count; i++)
                     {
-                        Graph.Create("Prefabs/Nodes/ConstantNode");
-                        CloseContextMenu();
-                    });
-                    ctx.Add("nodes/operators/if", () =>
-                    {
-                        Graph.Create("Prefabs/Nodes/BranchNode");
-                        CloseContextMenu();
-                    });
+                        var nodeConfig = nodeConfigList[i];
+                        ctx.Add($"Nodes/{nodeConfig.Menu}", () =>
+                        {
+                            CreateNode(nodeConfig);
+                        });
+                    }
                     var ctxData = ctx.Build();
 
                     SetContextMenu(ctxData);
@@ -55,6 +55,12 @@ namespace NotionFormulaEditor
                 }
                     break;
             }
+        }
+
+        private void CreateNode(ResNodes nodeConfig)
+        {
+            Graph.Create(nodeConfig);
+            CloseContextMenu();
         }
 
         private void OnNodePointerClick(Node node, PointerEventData eventData)
