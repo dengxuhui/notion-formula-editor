@@ -18,23 +18,26 @@ namespace Excel2JsonUnity.Editor
 
 
         //类型映射表
-        public static readonly Dictionary<string, string> DataTypes = new Dictionary<string, string>
+        public static readonly Dictionary<string, string> DataTypes = new()
         {
             { "string", "string" },
+            { "String", "string" },
             { "int", "int" },
+            { "Int", "int" },
             { "float", "float" },
+            { "Float", "float" },
             { "string[]", "System.Collections.Generic.List<string>" },
             { "int[]", "System.Collections.Generic.List<int>" },
             { "float[]", "System.Collections.Generic.List<float>" },
             //下面是自定义数据类型
-            { "SampleCustomData", "Excel2JsonUnity.Sample.SampleCustomData" },
+            { "SocketType", "RuntimeNodeEditor.SocketType" },
         };
 
         #region 错误消息定义
 
         //错误消息定义
         public static readonly Dictionary<Excel2JsonErrorCode, string> ErrorMsg =
-            new Dictionary<Excel2JsonErrorCode, string>
+            new()
             {
                 { Excel2JsonErrorCode.ExcelDirectoryNotSet, "excel目录未设定" },
                 { Excel2JsonErrorCode.JsonDirectoryNotSet, "json导出目录未设定" },
@@ -45,6 +48,7 @@ namespace Excel2JsonUnity.Editor
                 { Excel2JsonErrorCode.TypeNotDefined, "类型未定义：{0}" },
                 { Excel2JsonErrorCode.FieldValueIsNotSpecifiedType, "字段值类型错误：{0}" },
                 { Excel2JsonErrorCode.UnknownFieldType, "未知数据类型：{0}" },
+                { Excel2JsonErrorCode.EnumFieldUndefined, "枚举字段未定义：{0}" },
             };
 
         //未知错误
@@ -87,5 +91,8 @@ namespace Excel2JsonUnity.Editor
 
         //未知数据类型
         UnknownFieldType,
+
+        //枚举未定义
+        EnumFieldUndefined,
     }
 }

@@ -29,7 +29,6 @@ namespace Excel2JsonUnity.Editor
             {
                 option.errorCode = Excel2JsonErrorCode.CSharpDirectoryNotSet;
                 return;
-                ;
             }
         }
 

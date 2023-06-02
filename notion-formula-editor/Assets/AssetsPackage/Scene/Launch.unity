@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 370150110}
   - component: {fileID: 370150109}
   - component: {fileID: 370150112}
+  - component: {fileID: 370150113}
   m_Layer: 0
   m_Name: UICamera
   m_TagString: MainCamera
@@ -273,6 +274,21 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &370150113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370150108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c1c113130cc4182a7ceac6aa8fe033f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minCameraSize: 1
+  maxCameraSize: 9
+  scopeRect: {fileID: 1616812672}
 --- !u!1 &1184678395
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,7 +482,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &1313355161
 Canvas:
   m_ObjectHideFlags: 0
@@ -476,7 +492,7 @@ Canvas:
   m_GameObject: {fileID: 1313355158}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 2
   m_Camera: {fileID: 370150110}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -495,9 +511,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1313355158}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.00925926, y: 0.00925926, z: 0.00925926}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1616812672}
@@ -508,8 +524,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920.0001, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1616812671
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,10 +558,10 @@ RectTransform:
   m_Father: {fileID: 1313355162}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 7000, y: 5000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1616812674
 CanvasRenderer:

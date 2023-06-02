@@ -15,7 +15,8 @@ namespace NotionFormulaEditor
             base.Init();
             _configDic = new Dictionary<string, IConfig>
             {
-                { nameof(ResNodes), new TConfig<ResNodes>().Load() }
+                { nameof(ResNodes), new TConfig<ResNodes>().Load() },
+                { nameof(ResSockets), new TConfig<ResSockets>().Load() },
             };
         }
 

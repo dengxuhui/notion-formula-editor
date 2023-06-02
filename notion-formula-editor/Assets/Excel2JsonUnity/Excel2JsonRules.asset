@@ -16,10 +16,10 @@ MonoBehaviour:
   exportJsonDirectory: Assets/AssetsPackage/Resources/Json
   exportCsharpDirectory: Assets/AssetsPackage/Scripts/Config/Datas
   csharpNamespace: NotionFormulaEditor.Config
-  inheritClassAssembly: Assembly-CSharp
+  runtimeAssembly: Assembly-CSharp
   inheritClassFullName: NotionFormulaEditor.Config.BaseConfig
   compressJson: 0
   defaultInt: 0
   defaultString: 
   defaultFloat: 0
-  defaultArray: null
+  defaultArray: '[]'

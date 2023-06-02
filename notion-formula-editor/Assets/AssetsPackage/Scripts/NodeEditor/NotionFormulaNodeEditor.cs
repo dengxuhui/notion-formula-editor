@@ -20,6 +20,7 @@ namespace NotionFormulaEditor
             Events.OnSocketConnect += OnConnect;
 
             // Graph.
+            CreateNode(ConfigManager.Get<ResNodes>(1));
         }
 
         /// <summary>

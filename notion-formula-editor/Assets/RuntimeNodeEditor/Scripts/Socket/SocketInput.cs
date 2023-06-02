@@ -11,6 +11,7 @@ namespace RuntimeNodeEditor
         public override void Setup()
         {
             Connections = new List<Connection>();
+            base.Setup();
         }
 
         public void OnPointerClick(PointerEventData eventData)

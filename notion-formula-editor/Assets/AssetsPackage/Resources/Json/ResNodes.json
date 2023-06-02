@@ -1,16 +1,20 @@
 ﻿[
 	{
-		"Name":"Constant",
 		"ID":1,
-		"Menu":"Constant",
-		"Prefab":"Prefabs/Nodes/ConstantNode",
-		"NodeType":1
+		"Name":"Result",
+		"Menu":"",
+		"Prefab":"Prefabs/Nodes/ResultNode"
 	},
 	{
-		"Name":"Branch",
 		"ID":2,
+		"Name":"Constant",
+		"Menu":"Constant",
+		"Prefab":"Prefabs/Nodes/ConstantNode"
+	},
+	{
+		"ID":3,
+		"Name":"Branch",
 		"Menu":"Operators/if",
-		"Prefab":"Prefabs/Nodes/BranchNode",
-		"NodeType":2
+		"Prefab":"Prefabs/Nodes/BranchNode"
 	}
 ]

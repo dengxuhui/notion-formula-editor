@@ -69,7 +69,7 @@ MonoBehaviour:
   m_text: Constant
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -446,6 +446,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 4697715494803601325}
     m_Modifications:
     - target: {fileID: 3783978722233111050, guid: d5b424b52c9f14126954e1025915a828, type: 3}
+      propertyPath: configId
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3783978722233111050, guid: d5b424b52c9f14126954e1025915a828, type: 3}
       propertyPath: connectionType
       value: 1
       objectReference: {fileID: 0}
@@ -463,7 +467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4426410529968217237, guid: d5b424b52c9f14126954e1025915a828, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4426410529968217237, guid: d5b424b52c9f14126954e1025915a828, type: 3}
       propertyPath: m_AnchorMax.y
@@ -471,7 +475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4426410529968217237, guid: d5b424b52c9f14126954e1025915a828, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4426410529968217237, guid: d5b424b52c9f14126954e1025915a828, type: 3}
       propertyPath: m_AnchorMin.y
@@ -515,7 +519,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4426410529968217237, guid: d5b424b52c9f14126954e1025915a828, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 110.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4426410529968217237, guid: d5b424b52c9f14126954e1025915a828, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -533,6 +537,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5037976750868697938, guid: d5b424b52c9f14126954e1025915a828, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
     - target: {fileID: 8910129825122914749, guid: d5b424b52c9f14126954e1025915a828, type: 3}
       propertyPath: m_Name
       value: SocketOutput
