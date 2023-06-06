@@ -7,33 +7,32 @@ namespace RuntimeNodeEditor
 {
     public abstract class Socket : MonoBehaviour
     {
-        public Node OwnerNode
-        {
-            get { return _ownerNode; }
-        }
+        public Node OwnerNode => _ownerNode;
 
-        public ISocketEvents Events
-        {
-            get { return _socketEvents; }
-        }
+        protected ISocketEvents Events => _socketEvents;
 
         /// <summary>
         /// 配置id
         /// </summary>
-        public int configId;
+        public int ConfigId => configId;
+
+        [SerializeField] private int configId;
+        [SerializeField] private TMP_Text textName;
 
         public string socketId;
         public SocketHandle handle;
         public ConnectionType connectionType;
+        protected bool allowMultiConnect = true;
+        
         private Node _ownerNode;
         private ISocketEvents _socketEvents;
-        [SerializeField] private TMP_Text textName;
 
 
-        public void SetOwner(Node owner, ISocketEvents events)
+        public void SetOwner(Node owner, ISocketEvents events, bool allowMultiConnect = true)
         {
             _ownerNode = owner;
             _socketEvents = events;
+            this.allowMultiConnect = allowMultiConnect;
             Setup();
         }
 

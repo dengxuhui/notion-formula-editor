@@ -20,7 +20,7 @@ namespace NotionFormulaEditor
             Events.OnSocketConnect += OnConnect;
 
             // Graph.
-            CreateNode(ConfigManager.Get<ResNodes>(1));
+            Graph.Create(ConfigManager.Get<ResNodes>(1), Vector2.zero);
         }
 
         /// <summary>
@@ -39,11 +39,13 @@ namespace NotionFormulaEditor
                     for (var i = 0; i < nodeConfigList.Count; i++)
                     {
                         var nodeConfig = nodeConfigList[i];
-                        ctx.Add($"Nodes/{nodeConfig.Menu}", () =>
+                        if (!string.IsNullOrEmpty(nodeConfig.Menu))
                         {
-                            CreateNode(nodeConfig);
-                        });
+                            ctx.Add($"Nodes/{nodeConfig.Menu}", () => { CreateNode(nodeConfig); });
+                        }
                     }
+
+
                     var ctxData = ctx.Build();
 
                     SetContextMenu(ctxData);

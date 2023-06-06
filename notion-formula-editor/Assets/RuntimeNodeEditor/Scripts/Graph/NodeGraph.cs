@@ -56,6 +56,7 @@ namespace RuntimeNodeEditor
             _signalSystem.OnNodePointerDragEvent += OnNodePointerDrag;
             // _signalSystem.OnGraphPointerDragEvent += OnGraphPointerDragged;
             // _signalSystem.OnGraphPointerScrollEvent += OnGraphPointerScrolled;
+            _signalSystem.OnForceDisconnect += Disconnect;
 
             pointerListener.Init(_signalSystem);
             drawer.Init(_signalSystem);
@@ -364,7 +365,7 @@ namespace RuntimeNodeEditor
 
                 Vector2 beforePointInContent;
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(_graphContainer, _zoomCenterPos,
-                    CameraManager.I.current, out beforePointInContent);
+                    CameraManager.I.movableCamera, out beforePointInContent);
 
                 Vector2 pivotPosition = new Vector3(_graphContainer.pivot.x * _graphContainer.rect.size.x,
                     _graphContainer.pivot.y * _graphContainer.rect.size.y);
@@ -418,7 +419,7 @@ namespace RuntimeNodeEditor
             for (var i = 0; i < canvasCorners.Length; i++)
             {
                 var worldPos = canvasCorners[i];
-                var screenPos = RectTransformUtility.WorldToScreenPoint(CameraManager.I.current, worldPos);
+                var screenPos = RectTransformUtility.WorldToScreenPoint(CameraManager.I.movableCamera, worldPos);
                 canvasCorners[i] = screenPos;
             }
 

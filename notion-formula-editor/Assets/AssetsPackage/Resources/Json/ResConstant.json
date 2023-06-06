@@ -1,0 +1,30 @@
+﻿[
+	{
+		"ID":1,
+		"Name":"E",
+		"Desc":"The base of the natural logarithm.",
+		"Value":"2.71828182845904",
+		"ValueType":"Float"
+	},
+	{
+		"ID":2,
+		"Name":"PI",
+		"Desc":"The ratio of a circle's circumference to its diameter.",
+		"Value":"3.14159265359",
+		"ValueType":"Float"
+	},
+	{
+		"ID":3,
+		"Name":"True",
+		"Desc":"boolean value true",
+		"Value":"1",
+		"ValueType":"Bool"
+	},
+	{
+		"ID":4,
+		"Name":"False",
+		"Desc":"boolean value false",
+		"Value":"0",
+		"ValueType":"Bool"
+	}
+]

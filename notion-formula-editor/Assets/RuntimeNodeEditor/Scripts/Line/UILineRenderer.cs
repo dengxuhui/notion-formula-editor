@@ -200,7 +200,7 @@ namespace UnityEngine.UI.Extensions
             {
 				Polygon.points = pointsToDraw;
 
-				Polygon.edgeRadius = LineThickness;
+				Polygon.edgeRadius = LineThickness / 40f;
 			}
 			// scale based on the size of the rect or use absolute, this is switchable
 			var sizeX = !relativeSize ? 1 : rectTransform.rect.width;

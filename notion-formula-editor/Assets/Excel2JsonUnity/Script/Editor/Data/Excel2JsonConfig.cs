@@ -31,6 +31,7 @@ namespace Excel2JsonUnity.Editor
             { "float[]", "System.Collections.Generic.List<float>" },
             //下面是自定义数据类型
             { "SocketType", "RuntimeNodeEditor.SocketType" },
+            { "SocketOutputValueType", "RuntimeNodeEditor.SocketOutputValueType" }
         };
 
         #region 错误消息定义

@@ -19,7 +19,13 @@ namespace NotionFormulaEditor
             CameraManager.I.Startup();
             ConfigManager.I.Startup();
             //创建节点图
-            var graph = editor.CreateGraph<NodeGraph>(editorHolder);
+            var settings = new NodeGraphSettings
+            {
+                bgColor = Color.gray,
+                connectionColor = Color.yellow,
+                graphSize = editorHolder.sizeDelta
+            };
+            var graph = editor.CreateGraph<NodeGraph>(editorHolder, settings);
             editor.StartEditor(graph);
         }
     }

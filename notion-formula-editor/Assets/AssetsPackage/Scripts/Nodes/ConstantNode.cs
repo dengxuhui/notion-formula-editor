@@ -1,5 +1,5 @@
-using System.Collections.Generic;
-using NotionFormulaEditor.Types;
+using NotionFormulaEditor.Config;
+using NotionFormulaEditor.Utility;
 using RuntimeNodeEditor;
 using TMPro;
 
@@ -13,34 +13,38 @@ namespace NotionFormulaEditor.Nodes
         public SocketOutput output;
         public TMP_Dropdown dropdown;
 
+        //选中的配置
+        private ResConstant _selectedConfig;
+        public ResConstant selectedConfig => _selectedConfig;
+
         public override void Setup()
         {
             base.Setup();
             Register(output);
-            dropdown.AddOptions(new List<TMP_Dropdown.OptionData>()
+
+            var resConstant = ConfigManager.GetGroup<ResConstant>();
+            for (var i = 0; i < resConstant.Configs.Count; i++)
             {
-                new(ConstantNodeType.e.ToString()),
-                new(ConstantNodeType.pi.ToString()),
-                new(ConstantNodeType.boolean_true.ToString()),
-                new(ConstantNodeType.boolean_false.ToString()),
-            });
+                var config = resConstant.Configs[i];
+                dropdown.options.Add(new TMP_Dropdown.OptionData(config.Name));
+            }
 
-            dropdown.onValueChanged.AddListener(selected => { OnDropdownValueChanged(selected); });
-
-            OnConnectionEvent += OnConnection;
-            OnDisconnectEvent += OnDisconnect;
+            dropdown.onValueChanged.AddListener(OnDropdownValueChanged);
+            dropdown.value = 0;
+            _selectedConfig = resConstant.Configs[0];
+            UpdateOutputValue();
         }
 
-        public void OnConnection(SocketInput input, IOutput output)
+        private void UpdateOutputValue()
         {
-        }
-
-        public void OnDisconnect(SocketInput input, IOutput output)
-        {
+            output.SetValue(NodeUtility.ParseConfigValue(_selectedConfig.ValueType, _selectedConfig.Value));
         }
 
         private void OnDropdownValueChanged(int selected)
         {
+            var config = ConfigManager.GetGroup<ResConstant>().Configs[selected];
+            _selectedConfig = config;
+            UpdateOutputValue();
         }
     }
 }

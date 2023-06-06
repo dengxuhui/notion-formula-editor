@@ -54,7 +54,9 @@ namespace RuntimeNodeEditor
 
         public virtual void Setup()
         {
-            SetHeader(nodeConfig.Name);
+            OnConnectionEvent += OnConnection;
+            OnDisconnectEvent += OnDisconnect;
+            headerText.SetText(nodeConfig.Name);
         }
 
         public virtual bool CanMove()
@@ -62,15 +64,15 @@ namespace RuntimeNodeEditor
             return true;
         }
 
-        public void Register(SocketOutput output)
+        protected void Register(SocketOutput output, bool allowMultiConnect = true)
         {
-            output.SetOwner(this, _socketEvents);
+            output.SetOwner(this, _socketEvents, allowMultiConnect);
             Outputs.Add(output);
         }
 
-        public void Register(SocketInput input)
+        protected void Register(SocketInput input, bool allowMultiConnect = true)
         {
-            input.SetOwner(this, _socketEvents);
+            input.SetOwner(this, _socketEvents, allowMultiConnect);
             Inputs.Add(input);
         }
 
@@ -84,17 +86,20 @@ namespace RuntimeNodeEditor
             OnDisconnectEvent?.Invoke(input, output);
         }
 
+        protected virtual void OnConnection(SocketInput input, IOutput output)
+        {
+        }
+
+        protected virtual void OnDisconnect(SocketInput input, IOutput output)
+        {
+        }
+
         public virtual void OnSerialize(Serializer serializer)
         {
         }
 
         public virtual void OnDeserialize(Serializer serializer)
         {
-        }
-
-        public void SetHeader(string name)
-        {
-            headerText.SetText(name);
         }
 
         public void SetPosition(Vector2 pos)

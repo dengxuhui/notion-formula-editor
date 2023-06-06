@@ -8,12 +8,18 @@ namespace NotionFormulaEditor
     /// </summary>
     public class CameraManager : MonoSingleton<CameraManager>
     {
-        //当前相机
-        private Camera _current;
-        
+        //可移动摄像机
+        private Camera _movableCamera;
+
+        //固定摄像机
+        private Camera _fixedCamera;
+
         //获取当前相机
-        public Camera current => _current;
-        
+        public Camera movableCamera => _movableCamera;
+
+        //固定摄像机
+        public Camera fixedCamera => _fixedCamera;
+
         protected override void Init()
         {
             base.Init();
@@ -34,7 +40,8 @@ namespace NotionFormulaEditor
 
         private void RefreshCamera()
         {
-            _current = Camera.main;
+            _movableCamera = GameObject.FindWithTag("MovableCamera").GetComponent<Camera>();
+            _fixedCamera = GameObject.FindWithTag("FixedCamera").GetComponent<Camera>();
         }
     }
 }

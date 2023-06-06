@@ -1,5 +1,4 @@
 using RuntimeNodeEditor;
-using UnityEngine;
 
 namespace NotionFormulaEditor.Nodes
 {
@@ -21,6 +20,17 @@ namespace NotionFormulaEditor.Nodes
             Register(predicateInput);
             Register(trueInput);
             Register(falseInput);
+        }
+
+
+        protected override void OnConnection(SocketInput input, IOutput output)
+        {
+            base.OnConnection(input, output);
+        }
+
+        protected override void OnDisconnect(SocketInput input, IOutput output)
+        {
+            base.OnDisconnect(input, output);
         }
     }
 }

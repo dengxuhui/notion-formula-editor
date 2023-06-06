@@ -28,4 +28,16 @@ namespace RuntimeNodeEditor
         /// </summary>
         Output,
     }
+    
+    
+    /// <summary>
+    /// 端口值类型定义
+    /// </summary>
+    public enum SocketOutputValueType
+    {
+        String,
+        Int,
+        Float,
+        Bool,
+    }
 }
