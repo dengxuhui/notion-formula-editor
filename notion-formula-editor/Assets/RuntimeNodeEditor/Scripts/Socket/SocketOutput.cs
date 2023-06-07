@@ -6,8 +6,8 @@ namespace RuntimeNodeEditor
 {
     public class SocketOutput : Socket, IOutput, IPointerClickHandler, IDragHandler, IEndDragHandler
     {
-        public  Connection  connection;
-        private object      _value;
+        public Connection connection;
+        private object _value;
 
         public void SetValue(object value)
         {
@@ -22,7 +22,24 @@ namespace RuntimeNodeEditor
 
         public T GetValue<T>()
         {
-            return (T)_value;
+            var val = _value;
+            if (val is not T && val != null)
+            {
+                var tType = typeof(T);
+                var vType = _value.GetType();
+                if (tType == typeof(bool))
+                {
+                    if (vType == typeof(float) || vType == typeof(int) || vType == typeof(double))
+                    {
+                        val =(float)_value > 0.0f;
+                    }
+                    else if (vType == typeof(string))
+                    {
+                        val = !string.IsNullOrEmpty(val as string);
+                    }
+                }
+            }
+            return (T)val;
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -49,7 +66,7 @@ namespace RuntimeNodeEditor
 
             Events.InvokeOutputSocketDragDropTo(null);
         }
-    
+
         public void Connect(Connection conn)
         {
             connection = conn;

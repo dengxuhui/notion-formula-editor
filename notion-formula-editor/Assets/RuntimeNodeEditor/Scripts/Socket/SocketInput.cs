@@ -44,5 +44,17 @@ namespace RuntimeNodeEditor
         {
             return Connections.Count > 0;
         }
+
+        public bool TryGetConnectionValue<T>(out T result)
+        {
+            if (Connections.Count > 0)
+            {
+                result = Connections[0].output.GetValue<T>();
+                return true;
+            }
+
+            result = default(T);
+            return false;
+        }
     }
 }

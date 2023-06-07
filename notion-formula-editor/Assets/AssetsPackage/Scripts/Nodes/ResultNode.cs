@@ -51,6 +51,10 @@ namespace NotionFormulaEditor.Nodes
                     var strResult = result.ToString();
                     RuntimeDataManager.I.result = strResult;
                 }
+                else
+                {
+                    RuntimeDataManager.I.result = string.Empty;
+                }
             }
         }
     }
