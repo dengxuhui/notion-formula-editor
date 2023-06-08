@@ -31,7 +31,7 @@ namespace RuntimeNodeEditor
                 {
                     if (vType == typeof(float) || vType == typeof(int) || vType == typeof(double))
                     {
-                        val =(float)_value > 0.0f;
+                        val = (float)_value > 0.0f;
                     }
                     else if (vType == typeof(string))
                     {
@@ -39,7 +39,23 @@ namespace RuntimeNodeEditor
                     }
                 }
             }
+
             return (T)val;
+        }
+
+        public bool IsString()
+        {
+            return _value is string;
+        }
+
+        public bool IsBool()
+        {
+            return _value is bool;
+        }
+
+        public bool IsNumber()
+        {
+            return _value is float or int or double;
         }
 
         public void OnPointerClick(PointerEventData eventData)

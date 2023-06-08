@@ -14,7 +14,25 @@
 	{
 		"ID":3,
 		"Name":"Branch",
-		"Menu":"Operators/if",
+		"Menu":"Operators/If",
 		"Prefab":"Prefabs/Nodes/BranchNode"
+	},
+	{
+		"ID":4,
+		"Name":"Add",
+		"Menu":"Operators/Add",
+		"Prefab":"Prefabs/Nodes/AddNode"
+	},
+	{
+		"ID":5,
+		"Name":"Number",
+		"Menu":"Input/Number",
+		"Prefab":"Prefabs/Nodes/NumberNode"
+	},
+	{
+		"ID":6,
+		"Name":"String",
+		"Menu":"Input/String",
+		"Prefab":"Prefabs/Nodes/StringNode"
 	}
 ]

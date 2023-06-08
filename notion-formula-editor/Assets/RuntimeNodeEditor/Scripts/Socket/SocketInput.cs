@@ -8,7 +8,7 @@ namespace RuntimeNodeEditor
     {
         public List<Connection> Connections { get; private set; }
 
-        public override void Setup()
+        protected override void Setup()
         {
             Connections = new List<Connection>();
             base.Setup();
@@ -45,15 +45,15 @@ namespace RuntimeNodeEditor
             return Connections.Count > 0;
         }
 
-        public bool TryGetConnectionValue<T>(out T result)
+        public bool TryGetConnectionOutput(out SocketOutput output)
         {
             if (Connections.Count > 0)
             {
-                result = Connections[0].output.GetValue<T>();
+                output = Connections[0].output;
                 return true;
             }
 
-            result = default(T);
+            output = null;
             return false;
         }
     }

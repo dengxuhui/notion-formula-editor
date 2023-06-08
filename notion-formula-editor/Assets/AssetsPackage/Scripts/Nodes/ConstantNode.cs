@@ -32,10 +32,10 @@ namespace NotionFormulaEditor.Nodes
             dropdown.onValueChanged.AddListener(OnDropdownValueChanged);
             dropdown.value = 0;
             _selectedConfig = resConstant.Configs[0];
-            UpdateOutputValue();
+            UpdateNodeValue();
         }
 
-        private void UpdateOutputValue()
+        protected override void UpdateNodeValue()
         {
             output.SetValue(NodeUtility.ParseConfigValue(_selectedConfig.ValueType, _selectedConfig.Value));
         }
@@ -44,7 +44,7 @@ namespace NotionFormulaEditor.Nodes
         {
             var config = ConfigManager.GetGroup<ResConstant>().Configs[selected];
             _selectedConfig = config;
-            UpdateOutputValue();
+            UpdateNodeValue();
         }
     }
 }

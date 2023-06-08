@@ -27,7 +27,6 @@ namespace RuntimeNodeEditor
         public event Action<SocketInput, IOutput> OnConnectionEvent;
         public event Action<SocketInput, IOutput> OnDisconnectEvent;
 
-        public TMP_Text headerText;
         public GameObject draggableBody;
 
         private NodeDraggablePanel _dragPanel;
@@ -56,7 +55,6 @@ namespace RuntimeNodeEditor
         {
             OnConnectionEvent += OnConnection;
             OnDisconnectEvent += OnDisconnect;
-            headerText.SetText(nodeConfig.Name);
         }
 
         public virtual bool CanMove()
@@ -89,12 +87,20 @@ namespace RuntimeNodeEditor
             OnDisconnectEvent?.Invoke(input, output);
         }
 
+        protected virtual void UpdateNodeValue()
+        {
+        }
+
         protected virtual void OnConnection(SocketInput input, IOutput output)
         {
+            output.ValueUpdated += UpdateNodeValue;
+            UpdateNodeValue();
         }
 
         protected virtual void OnDisconnect(SocketInput input, IOutput output)
         {
+            output.ValueUpdated -= UpdateNodeValue;
+            UpdateNodeValue();
         }
 
         public virtual void OnSerialize(Serializer serializer)

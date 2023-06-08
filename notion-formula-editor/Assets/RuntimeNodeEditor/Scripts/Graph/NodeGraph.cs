@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using NotionFormulaEditor;
 using NotionFormulaEditor.Config;
@@ -153,14 +154,14 @@ namespace RuntimeNodeEditor
 
         public void SaveFile(string path)
         {
-            System.IO.File.WriteAllText(path, ExportJson());
+            File.WriteAllText(path, ExportJson());
         }
 
         public void LoadFile(string path)
         {
-            if (System.IO.File.Exists(path))
+            if (File.Exists(path))
             {
-                var file = System.IO.File.ReadAllText(path);
+                var file = File.ReadAllText(path);
                 var graph = JsonUtility.FromJson<GraphData>(file);
 
                 foreach (var data in graph.nodes)
@@ -488,7 +489,7 @@ namespace RuntimeNodeEditor
 
         private static string NewId()
         {
-            return System.Guid.NewGuid().ToString();
+            return Guid.NewGuid().ToString();
         }
     }
 }

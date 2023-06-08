@@ -22,38 +22,34 @@ namespace NotionFormulaEditor.Nodes
             Register(falseInput, false);
         }
 
-        private void UpdateOutputValue()
+        protected override void UpdateNodeValue()
         {
-            var hasTrueValue = trueInput.TryGetConnectionValue<object>(out var ifTrueValue);
-            var hasFalseValue = falseInput.TryGetConnectionValue<object>(out var isFalseValue);
-            var hasPredicateValue = predicateInput.TryGetConnectionValue<bool>(out var predicateValue);
-            if (!hasPredicateValue)
+            base.UpdateNodeValue();
+            if (predicateInput.TryGetConnectionOutput(out var predicateOutput))
             {
-                return;
-            }
+                bool predicateValue = predicateOutput.GetValue<bool>();
+                if (predicateValue && trueInput.TryGetConnectionOutput(out var trueOutput))
+                {
+                    output.SetValue(trueOutput.GetValue<object>());
+                }
+                else
+                {
+                    output.SetValue(null);
+                }
 
-            if (predicateValue)
-            {
-                output.SetValue(hasTrueValue ? ifTrueValue : null);
+                if (!predicateValue && falseInput.TryGetConnectionOutput(out var falseOutput))
+                {
+                    output.SetValue(falseOutput.GetValue<object>());
+                }
+                else
+                {
+                    output.SetValue(null);
+                }
             }
             else
             {
-                output.SetValue(hasFalseValue ? isFalseValue : null);
+                output.SetValue(null);
             }
-        }
-
-        protected override void OnConnection(SocketInput input, IOutput output)
-        {
-            base.OnConnection(input, output);
-            output.ValueUpdated += UpdateOutputValue;
-            UpdateOutputValue();
-        }
-
-        protected override void OnDisconnect(SocketInput input, IOutput output)
-        {
-            base.OnDisconnect(input, output);
-            output.ValueUpdated -= UpdateOutputValue;
-            UpdateOutputValue();
         }
     }
 }
