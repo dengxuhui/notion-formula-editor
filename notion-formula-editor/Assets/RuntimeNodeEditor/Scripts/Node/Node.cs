@@ -62,18 +62,15 @@ namespace RuntimeNodeEditor
             return true;
         }
 
-        //注册output，output默认是多连接并且不可修改
         protected void Register(SocketOutput output)
         {
-            //output一定可以多个结果连接出去
-            output.SetOwner(this, _socketEvents, true);
+            output.SetOwner(this, _socketEvents);
             Outputs.Add(output);
         }
 
-        //注册input，input默认是单连接
-        protected void Register(SocketInput input, bool allowMultiConnect)
+        protected void Register(SocketInput input)
         {
-            input.SetOwner(this, _socketEvents, allowMultiConnect);
+            input.SetOwner(this, _socketEvents);
             Inputs.Add(input);
         }
 

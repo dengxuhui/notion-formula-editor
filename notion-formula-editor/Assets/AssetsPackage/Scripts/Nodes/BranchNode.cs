@@ -17,9 +17,9 @@ namespace NotionFormulaEditor.Nodes
         {
             base.Setup();
             Register(output);
-            Register(predicateInput, false);
-            Register(trueInput, false);
-            Register(falseInput, false);
+            Register(predicateInput);
+            Register(trueInput);
+            Register(falseInput);
         }
 
         protected override void UpdateNodeValue()

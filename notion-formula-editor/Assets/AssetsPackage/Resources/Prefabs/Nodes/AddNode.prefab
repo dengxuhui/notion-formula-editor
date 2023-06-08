@@ -132,7 +132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 760123f847c44328acae351fdbe7a8f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  headerText: {fileID: 5643503289768280923}
   draggableBody: {fileID: 2391020933655481521}
   param1: {fileID: 6043430410059151084}
   param2: {fileID: 8078423319694672579}
@@ -592,6 +591,10 @@ PrefabInstance:
       propertyPath: configId
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 2037711194971394908, guid: 08a2cede52f8c4446ba4b9e7b0d17783, type: 3}
+      propertyPath: connectionType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4112341839008879003, guid: 08a2cede52f8c4446ba4b9e7b0d17783, type: 3}
       propertyPath: m_text
       value: A(1)
@@ -712,6 +715,10 @@ PrefabInstance:
     - target: {fileID: 2037711194971394908, guid: 08a2cede52f8c4446ba4b9e7b0d17783, type: 3}
       propertyPath: configId
       value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2037711194971394908, guid: 08a2cede52f8c4446ba4b9e7b0d17783, type: 3}
+      propertyPath: connectionType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4112341839008879003, guid: 08a2cede52f8c4446ba4b9e7b0d17783, type: 3}
       propertyPath: m_text

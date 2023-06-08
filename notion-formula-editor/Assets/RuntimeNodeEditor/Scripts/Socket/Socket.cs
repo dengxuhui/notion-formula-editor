@@ -11,17 +11,15 @@ namespace RuntimeNodeEditor
         public string socketId;
         public SocketHandle handle;
         public ConnectionType connectionType;
-        protected bool allowMultiConnect = true;
 
         private Node _ownerNode;
         private ISocketEvents _socketEvents;
 
 
-        public void SetOwner(Node owner, ISocketEvents events, bool allowMultiConnect = true)
+        public void SetOwner(Node owner, ISocketEvents events)
         {
             _ownerNode = owner;
             _socketEvents = events;
-            this.allowMultiConnect = allowMultiConnect;
             Setup();
         }
 

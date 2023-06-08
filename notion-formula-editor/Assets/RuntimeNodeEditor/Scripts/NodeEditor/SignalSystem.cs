@@ -62,7 +62,6 @@ namespace RuntimeNodeEditor
         public event Action<SocketInput> OnOutputSocketDragDropEvent;
         public event Action<SocketInput, PointerEventData> OnInputSocketClickEvent;
         public event Action<SocketOutput, PointerEventData> OnOutputSocketClickEvent;
-        public event Action<Connection> OnForceDisconnect;
 
         public void InvokeSocketDragFrom(SocketOutput output)
         {
@@ -82,11 +81,6 @@ namespace RuntimeNodeEditor
         public void InvokeOutputSocketClick(SocketOutput output, PointerEventData eventData)
         {
             OnOutputSocketClickEvent?.Invoke(output, eventData);
-        }
-
-        public void InvokeForceDisconnect(Connection conn)
-        {
-            OnForceDisconnect?.Invoke(conn);
         }
 
         #endregion
@@ -135,13 +129,10 @@ namespace RuntimeNodeEditor
         event Action<SocketInput> OnOutputSocketDragDropEvent;
         event Action<SocketInput, PointerEventData> OnInputSocketClickEvent;
         event Action<SocketOutput, PointerEventData> OnOutputSocketClickEvent;
-        event Action<Connection> OnForceDisconnect;
-
         void InvokeSocketDragFrom(SocketOutput output);
         void InvokeOutputSocketDragDropTo(SocketInput input);
         void InvokeInputSocketClick(SocketInput input, PointerEventData eventData);
         void InvokeOutputSocketClick(SocketOutput output, PointerEventData eventData);
-        void InvokeForceDisconnect(Connection conn);
     }
 
     public interface IConnectionEvents

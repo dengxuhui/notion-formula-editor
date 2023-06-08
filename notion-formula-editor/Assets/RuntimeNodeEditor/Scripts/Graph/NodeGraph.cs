@@ -57,7 +57,6 @@ namespace RuntimeNodeEditor
             _signalSystem.OnNodePointerDragEvent += OnNodePointerDrag;
             // _signalSystem.OnGraphPointerDragEvent += OnGraphPointerDragged;
             // _signalSystem.OnGraphPointerScrollEvent += OnGraphPointerScrolled;
-            _signalSystem.OnForceDisconnect += Disconnect;
 
             pointerListener.Init(_signalSystem);
             drawer.Init(_signalSystem);

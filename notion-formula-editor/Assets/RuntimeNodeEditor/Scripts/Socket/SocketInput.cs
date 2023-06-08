@@ -21,18 +21,7 @@ namespace RuntimeNodeEditor
 
         public void Connect(Connection conn)
         {
-            if (allowMultiConnect || Connections.Count <= 0)
-            {
-                Connections.Add(conn);
-            }
-            else
-            {
-                //调用Graph断开连接
-                //先断开所有链接，再连接
-                //不允许多连接，Connections一定只有一个
-                Events.InvokeForceDisconnect(Connections[0]);
-                Connections.Add(conn);
-            }
+            Connections.Add(conn);
         }
 
         public void Disconnect(Connection conn)

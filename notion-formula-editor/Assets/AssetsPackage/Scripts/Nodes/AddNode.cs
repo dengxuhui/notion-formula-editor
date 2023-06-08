@@ -15,8 +15,8 @@ namespace NotionFormulaEditor.Nodes
         public override void Setup()
         {
             base.Setup();
-            Register(param1, false);
-            Register(param2, false);
+            Register(param1);
+            Register(param2);
             Register(addResult);
         }
 
