@@ -13,26 +13,38 @@
 	},
 	{
 		"ID":3,
-		"Name":"Branch",
-		"Menu":"Operators/If",
-		"Prefab":"Prefabs/Nodes/BranchNode"
-	},
-	{
-		"ID":4,
-		"Name":"Add",
-		"Menu":"Operators/Add",
-		"Prefab":"Prefabs/Nodes/AddNode"
-	},
-	{
-		"ID":5,
 		"Name":"Number",
 		"Menu":"Input/Number",
 		"Prefab":"Prefabs/Nodes/NumberNode"
 	},
 	{
-		"ID":6,
+		"ID":4,
 		"Name":"String",
 		"Menu":"Input/String",
 		"Prefab":"Prefabs/Nodes/StringNode"
+	},
+	{
+		"ID":5,
+		"Name":"Boolean",
+		"Menu":"Input/Boolean",
+		"Prefab":"Prefabs/Nodes/BooleanNode"
+	},
+	{
+		"ID":6,
+		"Name":"Branch",
+		"Menu":"Operators/If",
+		"Prefab":"Prefabs/Nodes/BranchNode"
+	},
+	{
+		"ID":7,
+		"Name":"Add",
+		"Menu":"Operators/Add",
+		"Prefab":"Prefabs/Nodes/AddNode"
+	},
+	{
+		"ID":8,
+		"Name":"Subtract",
+		"Menu":"Operators/Subtract",
+		"Prefab":"Prefabs/Nodes/SubtractNode"
 	}
 ]

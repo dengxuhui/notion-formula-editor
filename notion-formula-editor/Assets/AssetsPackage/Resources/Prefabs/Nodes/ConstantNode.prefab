@@ -357,7 +357,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 638efab0842a4dc78e15f9bfaba40315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  headerText: {fileID: 3336885658090660026}
   draggableBody: {fileID: 4697715493282983760}
   output: {fileID: 4709392974908356973}
   dropdown: {fileID: 2542556631333373880}
@@ -536,6 +535,10 @@ PrefabInstance:
     - target: {fileID: 4426410529968217237, guid: d5b424b52c9f14126954e1025915a828, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037976750868697938, guid: d5b424b52c9f14126954e1025915a828, type: 3}
+      propertyPath: m_text
+      value: Out(1)
       objectReference: {fileID: 0}
     - target: {fileID: 5037976750868697938, guid: d5b424b52c9f14126954e1025915a828, type: 3}
       propertyPath: m_sharedMaterial
