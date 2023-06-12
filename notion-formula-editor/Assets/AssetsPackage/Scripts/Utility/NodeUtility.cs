@@ -1,3 +1,4 @@
+using System;
 using RuntimeNodeEditor;
 
 namespace NotionFormulaEditor.Utility
@@ -34,6 +35,42 @@ namespace NotionFormulaEditor.Utility
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// 转换为bool值
+        /// </summary>
+        /// <param name="output"></param>
+        /// <returns></returns>
+        public static bool ConvertToBool(SocketOutput output)
+        {
+            if (output.IsBool())
+            {
+                return output.GetValue<bool>();
+            }
+            else if (output.IsNumber())
+            {
+                return Convert.ToBoolean(output.GetValue<float>());
+            }
+            else if (output.IsString())
+            {
+                return string.IsNullOrEmpty(output.GetValue<string>());
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 校验类型是否相等
+        /// </summary>
+        /// <param name="o1"></param>
+        /// <param name="o2"></param>
+        /// <returns></returns>
+        public static bool IsSameType(SocketOutput o1, SocketOutput o2)
+        {
+            return o1.GetValueType() == o2.GetValueType();
         }
     }
 }

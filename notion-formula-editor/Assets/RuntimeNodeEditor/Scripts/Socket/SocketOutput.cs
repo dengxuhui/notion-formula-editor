@@ -58,6 +58,11 @@ namespace RuntimeNodeEditor
             return _value is float or int or double;
         }
 
+        public Type GetValueType()
+        {
+            return _value.GetType();
+        }
+
         public void OnPointerClick(PointerEventData eventData)
         {
             Events.InvokeOutputSocketClick(this, eventData);
