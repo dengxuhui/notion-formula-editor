@@ -46,5 +46,29 @@
 		"Name":"Subtract",
 		"Menu":"Operators/Subtract",
 		"Prefab":"Prefabs/Nodes/SubtractNode"
+	},
+	{
+		"ID":9,
+		"Name":"Multiply",
+		"Menu":"Operators/Multiply",
+		"Prefab":"Prefabs/Nodes/MultiplyNode"
+	},
+	{
+		"ID":10,
+		"Name":"Divide",
+		"Menu":"Operators/Divide",
+		"Prefab":"Prefabs/Nodes/DivideNode"
+	},
+	{
+		"ID":11,
+		"Name":"Pow",
+		"Menu":"Operators/Pow",
+		"Prefab":"Prefabs/Nodes/PowNode"
+	},
+	{
+		"ID":12,
+		"Name":"Mod",
+		"Menu":"Operators/Mod",
+		"Prefab":"Prefabs/Nodes/ModNode"
 	}
 ]
