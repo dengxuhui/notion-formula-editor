@@ -3,132 +3,176 @@
 		"ID":1,
 		"Name":"Result",
 		"Menu":"",
-		"Prefab":"Prefabs/Nodes/ResultNode"
+		"Prefab":"Prefabs/Nodes/ResultNode",
+		"Duplicatable":0,
+		"Deletable":0
 	},
 	{
 		"ID":2,
 		"Name":"Constant",
 		"Menu":"Constant",
-		"Prefab":"Prefabs/Nodes/ConstantNode"
+		"Prefab":"Prefabs/Nodes/ConstantNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":3,
 		"Name":"Number",
 		"Menu":"Input/Number",
-		"Prefab":"Prefabs/Nodes/NumberNode"
+		"Prefab":"Prefabs/Nodes/NumberNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":4,
 		"Name":"String",
 		"Menu":"Input/String",
-		"Prefab":"Prefabs/Nodes/StringNode"
+		"Prefab":"Prefabs/Nodes/StringNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":5,
 		"Name":"Boolean",
 		"Menu":"Input/Boolean",
-		"Prefab":"Prefabs/Nodes/BooleanNode"
+		"Prefab":"Prefabs/Nodes/BooleanNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":6,
 		"Name":"Branch",
 		"Menu":"Operators/If",
-		"Prefab":"Prefabs/Nodes/BranchNode"
+		"Prefab":"Prefabs/Nodes/BranchNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":7,
 		"Name":"Add",
 		"Menu":"Operators/Add",
-		"Prefab":"Prefabs/Nodes/AddNode"
+		"Prefab":"Prefabs/Nodes/AddNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":8,
 		"Name":"Subtract",
 		"Menu":"Operators/Subtract",
-		"Prefab":"Prefabs/Nodes/SubtractNode"
+		"Prefab":"Prefabs/Nodes/SubtractNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":9,
 		"Name":"Multiply",
 		"Menu":"Operators/Multiply",
-		"Prefab":"Prefabs/Nodes/MultiplyNode"
+		"Prefab":"Prefabs/Nodes/MultiplyNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":10,
 		"Name":"Divide",
 		"Menu":"Operators/Divide",
-		"Prefab":"Prefabs/Nodes/DivideNode"
+		"Prefab":"Prefabs/Nodes/DivideNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":11,
 		"Name":"Pow",
 		"Menu":"Operators/Pow",
-		"Prefab":"Prefabs/Nodes/PowNode"
+		"Prefab":"Prefabs/Nodes/PowNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":12,
 		"Name":"Mod",
 		"Menu":"Operators/Mod",
-		"Prefab":"Prefabs/Nodes/ModNode"
+		"Prefab":"Prefabs/Nodes/ModNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":13,
 		"Name":"ToNumber",
 		"Menu":"Operators/ToNumber",
-		"Prefab":"Prefabs/Nodes/UnaryPlusNode"
+		"Prefab":"Prefabs/Nodes/UnaryPlusNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":14,
 		"Name":"Not",
 		"Menu":"Operators/Not",
-		"Prefab":"Prefabs/Nodes/NotNode"
+		"Prefab":"Prefabs/Nodes/NotNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":15,
 		"Name":"And",
 		"Menu":"Operators/And",
-		"Prefab":"Prefabs/Nodes/AndNode"
+		"Prefab":"Prefabs/Nodes/AndNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":16,
 		"Name":"Or",
 		"Menu":"Operators/Or",
-		"Prefab":"Prefabs/Nodes/OrNode"
+		"Prefab":"Prefabs/Nodes/OrNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":17,
 		"Name":"Equal",
 		"Menu":"Operators/Equal",
-		"Prefab":"Prefabs/Nodes/EqualNode"
+		"Prefab":"Prefabs/Nodes/EqualNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":18,
 		"Name":"Unequal",
 		"Menu":"Operators/Unequal",
-		"Prefab":"Prefabs/Nodes/UnequalNode"
+		"Prefab":"Prefabs/Nodes/UnequalNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":19,
 		"Name":"Larger",
 		"Menu":"Operators/Larger",
-		"Prefab":"Prefabs/Nodes/LargerNode"
+		"Prefab":"Prefabs/Nodes/LargerNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":20,
 		"Name":"LargerEq",
 		"Menu":"Operators/LargerEq",
-		"Prefab":"Prefabs/Nodes/LargerEqNode"
+		"Prefab":"Prefabs/Nodes/LargerEqNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":21,
 		"Name":"Smaller",
 		"Menu":"Operators/Smaller",
-		"Prefab":"Prefabs/Nodes/SmallerNode"
+		"Prefab":"Prefabs/Nodes/SmallerNode",
+		"Duplicatable":1,
+		"Deletable":1
 	},
 	{
 		"ID":22,
 		"Name":"SmallerEq",
 		"Menu":"Operators/SmallerEq",
-		"Prefab":"Prefabs/Nodes/SmallerEqNode"
+		"Prefab":"Prefabs/Nodes/SmallerEqNode",
+		"Duplicatable":1,
+		"Deletable":1
 	}
 ]

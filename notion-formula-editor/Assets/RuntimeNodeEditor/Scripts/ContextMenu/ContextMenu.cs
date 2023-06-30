@@ -74,7 +74,7 @@ namespace RuntimeNodeEditor
 
             bool hasSubMenu = node.IsTerminal == false;
             item.subContextIcon.gameObject.SetActive(hasSubMenu);
-
+            item.button.interactable = node.selectable;
             if (hasSubMenu)
             {
                 item.button.onClick.AddListener(()=> CreateSubContext(node, item.subContextTransform));

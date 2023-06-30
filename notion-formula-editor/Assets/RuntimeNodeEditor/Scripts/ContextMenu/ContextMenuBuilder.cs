@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+
 namespace RuntimeNodeEditor
 {
     public class ContextMenuBuilder
@@ -13,7 +14,13 @@ namespace RuntimeNodeEditor
 
         public ContextMenuBuilder Add(string name, Action callback)
         {
-            BuildHierarchy(name).callback = callback;
+            BuildHierarchy(name, true).callback = callback;
+            return this;
+        }
+
+        public ContextMenuBuilder Add(string name, bool selectable, Action callback)
+        {
+            BuildHierarchy(name, selectable).callback = callback;
             return this;
         }
 
@@ -22,7 +29,7 @@ namespace RuntimeNodeEditor
             return _root;
         }
 
-        private ContextItemData BuildHierarchy(string path)
+        private ContextItemData BuildHierarchy(string path, bool selectable)
         {
             path = path.Replace("\\", "/");
             string[] split = path.Split('/');
@@ -54,6 +61,7 @@ namespace RuntimeNodeEditor
                 }
             }
 
+            itemData.selectable = selectable;
             return itemData;
         }
     }
@@ -64,10 +72,11 @@ namespace RuntimeNodeEditor
         public ContextItemData parent;
         public List<ContextItemData> children;
         public Action callback;
+        public bool selectable = true;
 
-        public bool IsRoot      => parent == null;
-        public int  Level       => IsRoot ? 0 : parent.Level + 1;
-        public bool IsTerminal  => children.Count == 0;
+        public bool IsRoot => parent == null;
+        public int Level => IsRoot ? 0 : parent.Level + 1;
+        public bool IsTerminal => children.Count == 0;
 
         public ContextItemData(string name)
         {

@@ -66,9 +66,36 @@ namespace NotionFormulaEditor
             CloseContextMenu();
         }
 
+        private void DeleteNode(Node node)
+        {
+            Graph.Delete(node);
+            CloseContextMenu();
+        }
+
+        private void Duplicate(Node node)
+        {
+            Graph.Create(node);
+            CloseContextMenu();
+        }
+
         private void OnNodePointerClick(Node node, PointerEventData eventData)
         {
-            Debug.Log("OnNodePointerClick");
+            switch (eventData.button)
+            {
+                //打开节点操作菜单
+                case PointerEventData.InputButton.Right:
+                {
+                    var ctx = new ContextMenuBuilder();
+                    var nodeConfig = node.nodeConfig;
+                    ctx.Add("Delete",nodeConfig.Deletable > 0, () => { DeleteNode(node); });
+                    ctx.Add("Duplicate",nodeConfig.Duplicatable > 0, () => { Duplicate(node); });
+
+
+                    SetContextMenu(ctx.Build());
+                    DisplayContextMenu();
+                }
+                    break;
+            }
         }
 
         private void OnNodeConnectionPointerClick(string connId, PointerEventData eventData)

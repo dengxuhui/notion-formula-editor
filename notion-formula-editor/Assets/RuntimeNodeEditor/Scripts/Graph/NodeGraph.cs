@@ -84,6 +84,12 @@ namespace RuntimeNodeEditor
             HandleSocketRegister(node);
         }
 
+        public void Create(Node cloneNode)
+        {
+            var position = cloneNode.Position + Vector2.one * 10;
+            Create(cloneNode.nodeConfig, position);
+        }
+
         public void Delete(Node node)
         {
             ClearConnectionsOf(node);
