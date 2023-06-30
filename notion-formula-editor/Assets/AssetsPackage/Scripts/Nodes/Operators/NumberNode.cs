@@ -19,6 +19,7 @@ namespace NotionFormulaEditor.Nodes
             Register(numberOutput);
             inputField.text = "0";
             inputField.onValueChanged.AddListener(OnInputValueChanged);
+            UpdateNodeValue();
         }
 
         protected override void UpdateNodeValue()

@@ -8,7 +8,7 @@ namespace NotionFormulaEditor.Nodes
     /// 与Notion不同的是，没有比对Boolean值与字符串的大小。
     /// 个人觉得这样的比较没有意义
     /// </summary>
-    public class LargeEqNode : Node
+    public class LargerEqNode : Node
     {
         public SocketInput left;
         public SocketInput right;

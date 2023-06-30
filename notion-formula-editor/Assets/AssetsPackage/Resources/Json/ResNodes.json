@@ -70,5 +70,65 @@
 		"Name":"Mod",
 		"Menu":"Operators/Mod",
 		"Prefab":"Prefabs/Nodes/ModNode"
+	},
+	{
+		"ID":13,
+		"Name":"ToNumber",
+		"Menu":"Operators/ToNumber",
+		"Prefab":"Prefabs/Nodes/UnaryPlusNode"
+	},
+	{
+		"ID":14,
+		"Name":"Not",
+		"Menu":"Operators/Not",
+		"Prefab":"Prefabs/Nodes/NotNode"
+	},
+	{
+		"ID":15,
+		"Name":"And",
+		"Menu":"Operators/And",
+		"Prefab":"Prefabs/Nodes/AndNode"
+	},
+	{
+		"ID":16,
+		"Name":"Or",
+		"Menu":"Operators/Or",
+		"Prefab":"Prefabs/Nodes/OrNode"
+	},
+	{
+		"ID":17,
+		"Name":"Equal",
+		"Menu":"Operators/Equal",
+		"Prefab":"Prefabs/Nodes/EqualNode"
+	},
+	{
+		"ID":18,
+		"Name":"Unequal",
+		"Menu":"Operators/Unequal",
+		"Prefab":"Prefabs/Nodes/UnequalNode"
+	},
+	{
+		"ID":19,
+		"Name":"Larger",
+		"Menu":"Operators/Larger",
+		"Prefab":"Prefabs/Nodes/LargerNode"
+	},
+	{
+		"ID":20,
+		"Name":"LargerEq",
+		"Menu":"Operators/LargerEq",
+		"Prefab":"Prefabs/Nodes/LargerEqNode"
+	},
+	{
+		"ID":21,
+		"Name":"Smaller",
+		"Menu":"Operators/Smaller",
+		"Prefab":"Prefabs/Nodes/SmallerNode"
+	},
+	{
+		"ID":22,
+		"Name":"SmallerEq",
+		"Menu":"Operators/SmallerEq",
+		"Prefab":"Prefabs/Nodes/SmallerEqNode"
 	}
 ]
